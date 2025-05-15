@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>For My Especial Aastha ❤️</title>
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;500&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #fbd3e9, #bb377d);
+      overflow-x: hidden;
+      min-height: 100vh;
+      position: relative;
+    }
+
+    .card {
+      background: white;
+      padding: 1.5rem;
+      border-radius: 1.5rem;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+      width: 90%;
+      max-width: 600px;
+      margin: 3rem auto;
+      text-align: center;
+      position: relative;
+      z-index: 10;
+    }
+
+    .card img {
+      width: 70%;
+      max-height: 25vh;
+      object-fit: cover;
+      border-radius: 1rem;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+      margin-bottom: 1rem;
+    }
+
+    .card h1 {
+      font-family: 'Pacifico', cursive;
+      color: #e91e63;
+      font-size: clamp(1.8rem, 5vw, 2.2rem);
+      margin-bottom: 0.8rem;
+    }
+
+    .card p {
+      font-size: clamp(0.9rem, 2.5vw, 1rem);
+      color: #555;
+      line-height: 1.6;
+      padding: 0 0.5rem;
+    }
+
+    .custom-player {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+      background: #ffe4ec;
+      border-radius: 2rem;
+      padding: 0.8rem 1rem;
+      box-shadow: 0 0 15px rgba(255, 105, 180, 0.4);
+      position: relative;
+      flex-wrap: wrap;
+      margin-top: 1.5rem;
+    }
+
+    .play-btn {
+      background: #ff8fb3;
+      border: none;
+      color: white;
+      font-size: 1.5rem;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      box-shadow: 0 0 8px #ff69b4;
+      transition: background 0.3s, transform 0.3s;
+      cursor: pointer;
+    }
+
+    .play-btn:hover {
+      background: #ff5f93;
+      transform: scale(1.1);
+    }
+
+    .slider {
+      -webkit-appearance: none;
+      width: 50%;
+      height: 6px;
+      border-radius: 5px;
+      background: linear-gradient(to right, #ff99cc, #ffb6d9);
+      outline: none;
+      cursor: pointer;
+    }
+
+    .slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 14px;
+      height: 14px;
+      background: #ff4fa0;
+      border-radius: 50%;
+      border: 2px solid white;
+      box-shadow: 0 0 5px #ff4fa0;
+    }
+
+    .time {
+      font-size: 0.8rem;
+      color: #d63384;
+      font-weight: 500;
+    }
+
+    .notification {
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      background: #ffe0f0;
+      color: #d81b60;
+      padding: 0.75rem 1.2rem;
+      border-radius: 1rem;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      font-size: 0.95rem;
+      font-weight: 500;
+      z-index: 1000;
+      animation: slideIn 0.5s ease;
+      cursor: pointer;
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .heart {
+      position: fixed;
+      top: -2rem;
+      font-size: 1.5rem;
+      animation: fall 5s linear infinite;
+      color: #ff69b4;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .card {
+        padding: 1rem;
+        border-radius: 1rem;
+      }
+
+      .card img {
+        width: 80%;
+        max-height: 20vh;
+      }
+
+      .card h1 {
+        font-size: clamp(1.5rem, 6vw, 1.8rem);
+      }
+
+      .card p {
+        font-size: clamp(0.8rem, 3vw, 0.9rem);
+      }
+
+      .custom-player {
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+
+      .slider {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <img src="index.jpg" alt="My Especial Aastha ❤️">
+    <h1>My Especial Aastha ❤️</h1>
+    <p>
+      Lehrata hoon main jaise nadiya bina kinara,<br>
+      Tera naam leke hi milta hai sahara।<br>
+      Tu paas ho toh khilta hai har raasta,<br>
+      Meri har dhadkan ki तू hi hai Aastha।
+    </p>
+    <div class="custom-player">
+      <button class="play-btn" id="playBtn">▶</button>
+      <input type="range" class="slider" id="progress" min="0" value="0">
+      <span class="time" id="currentTime">0:00</span>
+      <span class="time" id="duration">0:00</span>
+      <audio id="audioPlayer" style="display: none;">
+        <source src="Yeh Dil Tum Bin.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+      </audio>
+    </div>
+  </div>
+
+  <script>
+    const audio = document.getElementById('audioPlayer');
+    const playBtn = document.getElementById('playBtn');
+    const progress = document.getElementById('progress');
+    const currentTimeEl = document.getElementById('currentTime');
+    const durationEl = document.getElementById('duration');
+    let heartInterval;
+
+    function formatTime(seconds) {
+      const min = Math.floor(seconds / 60);
+      const sec = Math.floor(seconds % 60);
+      return `${min}:${sec < 10 ? '0' : ''}${sec}`;
+    }
+
+    function showNotification(message) {
+      const notification = document.createElement('div');
+      notification.className = 'notification';
+      notification.textContent = message;
+      document.body.appendChild(notification);
+
+      notification.addEventListener('click', () => notification.remove());
+      setTimeout(() => {
+        if (document.body.contains(notification)) notification.remove();
+      }, 5000);
+    }
+
+    function createHeart() {
+      const heart = document.createElement('div');
+      heart.className = 'heart';
+      heart.textContent = '💖';
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.animationDuration = (Math.random() * 2 + 3) + 's';
+      document.body.appendChild(heart);
+
+      setTimeout(() => heart.remove(), 6000);
+    }
+
+    playBtn.addEventListener('click', () => {
+      if (audio.paused) {
+        audio.play();
+        playBtn.textContent = '❚❚';
+      } else {
+        audio.pause();
+        playBtn.textContent = '▶';
+      }
+    });
+
+    audio.addEventListener('play', () => {
+      showNotification("🎶 Playing for Aastha 💖");
+      heartInterval = setInterval(createHeart, 500);
+    });
+
+    audio.addEventListener('pause', () => {
+      showNotification("⏸️ Music paused, but love continues 💗");
+      clearInterval(heartInterval);
+    });
+
+    audio.addEventListener('ended', () => {
+      showNotification("🎵 Music ended, but memories remain 💞");
+      clearInterval(heartInterval);
+      playBtn.textContent = '▶';
+    });
+
+    audio.addEventListener('loadedmetadata', () => {
+      progress.max = audio.duration;
+      durationEl.textContent = formatTime(audio.duration);
+    });
+
+    audio.addEventListener('timeupdate', () => {
+      progress.value = audio.currentTime;
+      currentTimeEl.textContent = formatTime(audio.currentTime);
+    });
+
+    progress.addEventListener('input', () => {
+      audio.currentTime = progress.value;
+    });
+  </script>
+</body>
+</html>
