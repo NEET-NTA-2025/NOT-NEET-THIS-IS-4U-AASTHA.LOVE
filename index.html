@@ -68,6 +68,7 @@
       position: relative;
       flex-wrap: wrap;
       margin-top: 1.5rem;
+      overflow: hidden; /* Ensure music notes stay within bounds */
     }
 
     .play-btn {
@@ -159,6 +160,26 @@
       }
     }
 
+    .music-note {
+      position: absolute;
+      font-size: 1rem;
+      color: #ff69b4;
+      pointer-events: none;
+      animation: float 2s ease-in-out forwards;
+      z-index: 5; /* Ensure notes stay within player but above controls */
+    }
+
+    @keyframes float {
+      0% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+      100% {
+        opacity: 0;
+        transform: translateY(-50px) scale(1.5);
+      }
+    }
+
     @media (max-width: 480px) {
       .card {
         padding: 1rem;
@@ -185,6 +206,10 @@
 
       .slider {
         width: 100%;
+      }
+
+      .music-note {
+        font-size: 0.8rem; /* Smaller notes for mobile */
       }
     }
   </style>
@@ -217,7 +242,9 @@
     const progress = document.getElementById('progress');
     const currentTimeEl = document.getElementById('currentTime');
     const durationEl = document.getElementById('duration');
+    const player = document.querySelector('.custom-player');
     let heartInterval;
+    let musicNoteInterval;
 
     function formatTime(seconds) {
       const min = Math.floor(seconds / 60);
@@ -248,6 +275,18 @@
       setTimeout(() => heart.remove(), 6000);
     }
 
+    function createMusicNote() {
+      const note = document.createElement('div');
+      note.className = 'music-note';
+      note.textContent = Math.random() > 0.5 ? '🎵' : '🎶';
+      note.style.left = Math.random() * 90 + 5 + '%'; // Stay within player bounds
+      note.style.top = Math.random() * 50 + 25 + '%'; // Center vertically
+      note.style.animationDuration = (Math.random() * 1 + 1.5) + 's'; // 1.5-2.5s
+      player.appendChild(note);
+
+      setTimeout(() => note.remove(), 2500);
+    }
+
     playBtn.addEventListener('click', () => {
       if (audio.paused) {
         audio.play();
@@ -261,16 +300,19 @@
     audio.addEventListener('play', () => {
       showNotification("🎶 Playing for Aastha 💖");
       heartInterval = setInterval(createHeart, 500);
+      musicNoteInterval = setInterval(createMusicNote, 800); // Subtle frequency
     });
 
     audio.addEventListener('pause', () => {
       showNotification("⏸️ Music paused, but love continues 💗");
       clearInterval(heartInterval);
+      clearInterval(musicNoteInterval);
     });
 
     audio.addEventListener('ended', () => {
       showNotification("🎵 Music ended, but memories remain 💞");
       clearInterval(heartInterval);
+      clearInterval(musicNoteInterval);
       playBtn.textContent = '▶';
     });
 
